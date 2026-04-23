@@ -2,8 +2,7 @@ import {
   APIGatewayAuthorizerResult,
   APIGatewayTokenAuthorizerHandler
 } from "aws-lambda";
-import * as jose from "jose";
-import { getAuth0VerifyConfig } from "../lib/auth0";
+import { verifyBearerJwt } from "../lib/jwtAuth";
 
 function buildPolicy(
   principalId: string,
@@ -41,14 +40,7 @@ export const handler: APIGatewayTokenAuthorizerHandler = async (event) => {
   }
 
   try {
-    const { issuer, audience, jwksUrl } = getAuth0VerifyConfig();
-    const JWKS = jose.createRemoteJWKSet(new URL(jwksUrl));
-
-    const { payload } = await jose.jwtVerify(token, JWKS, {
-      issuer,
-      audience
-    });
-
+    const payload = await verifyBearerJwt(token);
     const sub = typeof payload.sub === "string" ? payload.sub : "user";
     const scope =
       typeof payload.scope === "string"

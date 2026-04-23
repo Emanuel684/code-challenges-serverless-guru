@@ -23,7 +23,8 @@ This implementation models a simple Notes API where users can create, read, upda
   - `GET /items/{id}` -> `getItem`
   - `PUT /items/{id}` -> `updateItem`
   - `DELETE /items/{id}` -> `deleteItem`
-- **Auth0 JWT**: A dedicated Lambda **TOKEN** authorizer (`authorizer`) validates `Authorization: Bearer <JWT>` on every CRUD route before invoking the handler.
+- **`POST /auth/token`** (`issueToken`): public endpoint; validates `clientId` / `clientSecret` and returns a self-issued **HS256 JWT**.
+- **Lambda TOKEN authorizer** (`authorizer`): verifies that JWT (`iss`, `aud`, signature, expiry) on every `/items` route before invoking the CRUD handler.
 - DynamoDB single-table design with primary key `id`.
 - Stage-specific resources through `serverless deploy --stage <stage>`:
   - `notes-crud-api-items-dev`
@@ -44,21 +45,41 @@ This implementation models a simple Notes API where users can create, read, upda
     |   |-- getItem.ts
     |   |-- updateItem.ts
     |   |-- deleteItem.ts
+    |   |-- issueToken.ts
     |   `-- authorizer.ts
     `-- lib
         |-- db.ts
         |-- response.ts
         |-- types.ts
-        `-- auth0.ts
+        `-- jwtAuth.ts
 ```
 
-## Authentication (Auth0)
+## Authentication (self-issued JWT)
 
-All `/items` endpoints require a valid Auth0 access token (JWT) intended for your API.
+1. Obtain a token (no `Authorization` header on this route):
 
-1. In Auth0, create an **API** and note the **Identifier** (this is your JWT `aud` / audience).
-2. Set **Allowed Callback / Machine-to-Machine** as needed for your client; obtain tokens with that API audience.
-3. Call the API with:
+`POST /auth/token`
+
+Request body:
+
+```json
+{
+  "clientId": "your-client-id",
+  "clientSecret": "your-client-secret"
+}
+```
+
+Response `200`:
+
+```json
+{
+  "access_token": "<jwt>",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}
+```
+
+2. Call `/items` routes with:
 
 ```http
 Authorization: Bearer <access_token>
@@ -68,17 +89,26 @@ Environment variables (required at **deploy** time so they are baked into Lambda
 
 | Variable | Example | Purpose |
 |----------|---------|---------|
-| `AUTH0_ISSUER_BASE_URL` | `https://YOUR_TENANT.auth0.com` | Issuer / JWKS base (no path) |
-| `AUTH0_AUDIENCE` | `https://your-api-id` | Must match JWT `aud` |
+| `JWT_SECRET` | 32+ character random string | HS256 signing key |
+| `JWT_ISSUER` | `notes-crud-api` | JWT `iss` claim |
+| `JWT_AUDIENCE` | `notes-crud-api-clients` | JWT `aud` claim |
+| `API_CLIENT_ID` | service client id | Must match `clientId` in token request |
+| `API_CLIENT_SECRET` | long random secret | Must match `clientSecret` in token request |
+| `JWT_EXPIRES_IN` | (optional) `3600` | Lifetime in seconds (60–604800); default `3600` if unset |
 
 Locally before `serverless deploy`:
 
 ```bash
-export AUTH0_ISSUER_BASE_URL="https://YOUR_TENANT.auth0.com"
-export AUTH0_AUDIENCE="https://your-api-identifier"
+export JWT_SECRET="...at-least-32-chars..."
+export JWT_ISSUER="notes-crud-api"
+export JWT_AUDIENCE="notes-crud-api-clients"
+export API_CLIENT_ID="your-client-id"
+export API_CLIENT_SECRET="your-client-secret"
+# optional:
+export JWT_EXPIRES_IN="3600"
 ```
 
-Invalid or missing tokens receive `401 Unauthorized` from API Gateway.
+Invalid or missing tokens on protected routes receive `401 Unauthorized` from API Gateway.
 
 ## Prerequisites
 
@@ -86,7 +116,7 @@ Invalid or missing tokens receive `401 Unauthorized` from API Gateway.
 - AWS account
 - AWS credentials configured locally (for manual deploys)
 - Serverless Framework CLI (installed via npm in this project)
-- Auth0 tenant + API (audience) and a way to mint access tokens for testing
+- Values for `JWT_*` and `API_CLIENT_*` (see table above)
 
 ## Install
 
@@ -102,7 +132,7 @@ Run type checks:
 npm run build
 ```
 
-Package/deploy manually (with Auth0 env vars set):
+Package/deploy manually (with JWT and client credential env vars set):
 
 ```bash
 npm run deploy:dev
@@ -111,7 +141,7 @@ npm run deploy:prod
 
 ## API Contract
 
-Every request below must include `Authorization: Bearer <JWT>` unless noted otherwise.
+Use **`POST /auth/token`** first to obtain `access_token`. Every `/items` request below must include `Authorization: Bearer <JWT>` unless noted otherwise.
 
 ### Create item
 
@@ -185,8 +215,12 @@ Required GitHub repository secrets:
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
-- `AUTH0_ISSUER_BASE_URL` (e.g. `https://YOUR_TENANT.auth0.com`)
-- `AUTH0_AUDIENCE` (Auth0 API identifier)
+- `JWT_SECRET` (32+ characters)
+- `JWT_ISSUER`
+- `JWT_AUDIENCE`
+- `API_CLIENT_ID`
+- `API_CLIENT_SECRET`
+- `JWT_EXPIRES_IN` (optional; omit or set empty to use default 3600 seconds in Lambda code—if you set this secret in GitHub, use a numeric string)
 
 ### CI/CD Evidence
 

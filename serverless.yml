@@ -8,8 +8,12 @@ provider:
   region: ${opt:region, 'us-east-1'}
   environment:
     ITEMS_TABLE_NAME: ${self:service}-items-${sls:stage}
-    AUTH0_ISSUER_BASE_URL: ${env:AUTH0_ISSUER_BASE_URL}
-    AUTH0_AUDIENCE: ${env:AUTH0_AUDIENCE}
+    JWT_SECRET: ${env:JWT_SECRET}
+    JWT_ISSUER: ${env:JWT_ISSUER}
+    JWT_AUDIENCE: ${env:JWT_AUDIENCE}
+    API_CLIENT_ID: ${env:API_CLIENT_ID}
+    API_CLIENT_SECRET: ${env:API_CLIENT_SECRET}
+    JWT_EXPIRES_IN: ${env:JWT_EXPIRES_IN, ''}
   iam:
     role:
       statements:
@@ -26,6 +30,13 @@ provider:
                 - Arn
 
 functions:
+  issueToken:
+    handler: src/handlers/issueToken.handler
+    events:
+      - http:
+          path: /auth/token
+          method: post
+          cors: true
   authorizer:
     handler: src/handlers/authorizer.handler
   createItem:
