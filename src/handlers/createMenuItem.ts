@@ -1,5 +1,16 @@
 /**
- * Add a drink or food line item to the coffee shop menu (`POST /menu-items`).
+ * **Create** a coffee shop menu row.
+ *
+ * - **Route**: `POST /menu-items`
+ * - **Auth**: Bearer JWT (API Gateway TOKEN authorizer on this route).
+ * - **DynamoDB**: `PutCommand` — full item document written with new UUID `id`.
+ * - **Status codes**: `201` created; `400` validation (`name`, `price` rules); `500` unexpected (includes malformed JSON body today).
+ *
+ * **Validation**
+ * - `name`: non-empty trimmed string.
+ * - `price`: required number, finite, `>= 0`.
+ * - `description`: optional string; defaults to `""`.
+ * - `available`: optional boolean; defaults to `true` when omitted.
  */
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";

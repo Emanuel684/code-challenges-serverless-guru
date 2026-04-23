@@ -1,3 +1,8 @@
+/**
+ * Tests for `src/handlers/createMenuItem.ts` with DynamoDB client mocked.
+ *
+ * Asserts HTTP status / response shape and that `PutCommand`-shaped input reaches `docClient.send`.
+ */
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 const send = vi.fn();

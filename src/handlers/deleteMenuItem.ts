@@ -1,5 +1,10 @@
 /**
- * Remove a menu item (`DELETE /menu-items/{id}`).
+ * **Delete** — remove a menu item by id.
+ *
+ * - **Route**: `DELETE /menu-items/{id}`
+ * - **Auth**: Bearer JWT (TOKEN authorizer).
+ * - **DynamoDB**: `DeleteCommand` with `ConditionExpression: attribute_exists(id)` so deletes are idempotent-ish (missing row → `404`).
+ * - **Status codes**: `200` with `{ id }` echo; `400` missing path `id`; `404` not found; `500` unexpected.
  */
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { DeleteCommand } from "@aws-sdk/lib-dynamodb";

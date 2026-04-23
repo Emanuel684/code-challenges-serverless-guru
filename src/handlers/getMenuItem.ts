@@ -1,5 +1,10 @@
 /**
- * Fetch one menu item by id (`GET /menu-items/{id}`).
+ * **Read (single)** — fetch one menu item by primary key.
+ *
+ * - **Route**: `GET /menu-items/{id}`
+ * - **Auth**: Bearer JWT (TOKEN authorizer).
+ * - **DynamoDB**: `GetCommand` on partition key `id`.
+ * - **Status codes**: `200` item found; `400` missing path `id`; `404` no item; `500` unexpected.
  */
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { GetCommand } from "@aws-sdk/lib-dynamodb";

@@ -1,5 +1,10 @@
 /**
- * List all menu items (`GET /menu-items`). Uses DynamoDB Scan (demo-friendly).
+ * **Read (collection)** — return every menu item in the table.
+ *
+ * - **Route**: `GET /menu-items`
+ * - **Auth**: Bearer JWT (TOKEN authorizer).
+ * - **DynamoDB**: `ScanCommand` — reads the whole table (acceptable for demos; production menus would use `Query` + GSIs/pagination).
+ * - **Status codes**: `200` with `data` array (possibly empty); `500` on AWS/client errors.
  */
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { ScanCommand } from "@aws-sdk/lib-dynamodb";

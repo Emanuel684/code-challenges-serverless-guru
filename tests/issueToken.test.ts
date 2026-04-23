@@ -1,3 +1,8 @@
+/**
+ * Tests for `src/handlers/issueToken.ts` (public `POST /auth/token`).
+ *
+ * Scenarios: happy-path token JSON, bad credentials, invalid JSON body, with env vars sandboxed per test.
+ */
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import type { APIGatewayProxyEvent, Context, Callback } from "aws-lambda";
 import { handler } from "../src/handlers/issueToken";

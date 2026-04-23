@@ -1,5 +1,13 @@
 /**
- * Update menu item fields (`PUT /menu-items/{id}`).
+ * **Update** — replace mutable fields on an existing menu item.
+ *
+ * - **Route**: `PUT /menu-items/{id}`
+ * - **Auth**: Bearer JWT (TOKEN authorizer).
+ * - **DynamoDB**: `UpdateCommand` with `ConditionExpression: attribute_exists(id)` so missing keys fail as `404`.
+ * - **Status codes**: `200` with updated attributes; `400` validation / missing `id`; `404` item missing; `500` other errors.
+ *
+ * **Validation**
+ * - Same `name` / `price` rules as create; `available` must be present and boolean; `description` optional string.
  */
 import { APIGatewayProxyHandler } from "aws-lambda";
 import { UpdateCommand } from "@aws-sdk/lib-dynamodb";

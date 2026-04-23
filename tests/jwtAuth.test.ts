@@ -1,3 +1,9 @@
+/**
+ * Unit tests for `src/lib/jwtAuth.ts`.
+ *
+ * Covers: constant-time string compare, JWT mint + verify round-trip, and env validation edge cases
+ * (isolated via `beforeEach` / `afterEach` env snapshot restore).
+ */
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import {
   safeEqualStrings,

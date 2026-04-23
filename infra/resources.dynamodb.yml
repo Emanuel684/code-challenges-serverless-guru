@@ -1,4 +1,7 @@
 # DynamoDB resources for the coffee shop API (composed by root serverless.yml).
+#
+# Root `serverless.yml` merges this under `resources.Resources`.
+# Single-table design: partition key `id` (string) for menu items; name comes from `${self:service}-menu-items-${sls:stage}`.
 Resources:
   MenuItemsTable:
     Type: AWS::DynamoDB::Table

@@ -1,4 +1,8 @@
 # Lambda functions and API Gateway HTTP events (composed by root serverless.yml).
+#
+# Root `serverless.yml` merges this fragment under `functions:`.
+# - `issueToken` is the only route **without** a TOKEN authorizer (public `POST /auth/token`).
+# - All `/menu-items` routes attach the shared `authorizer` Lambda (Bearer JWT in `Authorization`).
 issueToken:
   handler: src/handlers/issueToken.handler
   events:
