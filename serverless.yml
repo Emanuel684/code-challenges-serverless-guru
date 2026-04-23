@@ -1,3 +1,11 @@
+# Notes CRUD API (Serverless Framework on AWS)
+# -----------------------------------------------------------------------------
+# - REST API (API Gateway) + Lambda + DynamoDB single-table (`ItemsTable`).
+# - Stages: pass `--stage` (default `dev`); table name and stack resources are stage-suffixed.
+# - Public route: POST /auth/token (issueToken) — mints HS256 JWT after client credential check.
+# - Protected routes: /items CRUD — Lambda TOKEN authorizer validates Bearer JWT before handlers run.
+# - Env at deploy: JWT_*, API_CLIENT_*, optional JWT_EXPIRES_IN (see README).
+# -----------------------------------------------------------------------------
 service: notes-crud-api
 frameworkVersion: "4"
 
