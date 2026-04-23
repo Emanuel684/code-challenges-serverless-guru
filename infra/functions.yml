@@ -1,0 +1,80 @@
+# Lambda functions and API Gateway HTTP events (composed by root serverless.yml).
+#
+# Root `serverless.yml` merges this fragment under `functions:`.
+# - `issueToken` is the only route **without** a TOKEN authorizer (public `POST /auth/token`).
+# - All `/menu-items` routes attach the shared `authorizer` Lambda (Bearer JWT in `Authorization`).
+issueToken:
+  handler: src/handlers/issueToken.handler
+  events:
+    - http:
+        path: /auth/token
+        method: post
+        cors: true
+
+authorizer:
+  handler: src/handlers/authorizer.handler
+
+createMenuItem:
+  handler: src/handlers/createMenuItem.handler
+  events:
+    - http:
+        path: /menu-items
+        method: post
+        cors: true
+        authorizer:
+          name: authorizer
+          type: token
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
+
+listMenuItems:
+  handler: src/handlers/listMenuItems.handler
+  events:
+    - http:
+        path: /menu-items
+        method: get
+        cors: true
+        authorizer:
+          name: authorizer
+          type: token
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
+
+getMenuItem:
+  handler: src/handlers/getMenuItem.handler
+  events:
+    - http:
+        path: /menu-items/{id}
+        method: get
+        cors: true
+        authorizer:
+          name: authorizer
+          type: token
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
+
+updateMenuItem:
+  handler: src/handlers/updateMenuItem.handler
+  events:
+    - http:
+        path: /menu-items/{id}
+        method: put
+        cors: true
+        authorizer:
+          name: authorizer
+          type: token
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
+
+deleteMenuItem:
+  handler: src/handlers/deleteMenuItem.handler
+  events:
+    - http:
+        path: /menu-items/{id}
+        method: delete
+        cors: true
+        authorizer:
+          name: authorizer
+          type: token
+          identitySource: method.request.header.Authorization
+          resultTtlInSeconds: 0
