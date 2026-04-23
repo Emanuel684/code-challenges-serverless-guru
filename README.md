@@ -135,8 +135,19 @@ npm run build
 Package/deploy manually (with JWT and client credential env vars set):
 
 ```bash
+source .env
+```
+
+```bash
 npm run deploy:dev
 npm run deploy:prod
+```
+
+or
+
+```bash
+npx serverless deploy --stage dev --region us-east-2
+npx serverless deploy --stage prod --region us-east-2
 ```
 
 ## API Contract
