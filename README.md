@@ -1,50 +1,55 @@
-# AWS API Gateway CRUD REST API
+# Coffee shop menu API (Serverless on AWS)
 
-Serverless Framework CRUD API built with AWS Lambda, API Gateway REST API, and DynamoDB.
+Serverless Framework REST API for a **coffee shop menu**: drinks and food items with price and availability, backed by **Amazon DynamoDB**, secured with a **self-issued JWT** and a **Lambda TOKEN authorizer**.
 
-## Business Case
+## Business case
 
-This implementation models a simple Notes API where users can create, read, update, and delete notes.
+Customers and staff interact with a **menu catalog** (e.g. lattes, pastries): create, list, read, update, and delete menu lines. Each line has a name, description, price, and whether it is currently available.
 
-## Tech Stack
+## Tech stack
 
-- Node.js + TypeScript
-- Serverless Framework
-- AWS Lambda
-- Amazon API Gateway (REST API)
-- Amazon DynamoDB
+- Node.js 22 + TypeScript
+- Serverless Framework v4 (built-in bundling; per-function packaging in `serverless.yml`)
+- AWS Lambda, API Gateway (REST), DynamoDB
+- Vitest for unit / handler tests
 - GitHub Actions for CI/CD
 
 ## Architecture
 
-- 5 Lambda handlers implement CRUD:
-  - `POST /items` -> `createItem`
-  - `GET /items` -> `listItems`
-  - `GET /items/{id}` -> `getItem`
-  - `PUT /items/{id}` -> `updateItem`
-  - `DELETE /items/{id}` -> `deleteItem`
-- **`POST /auth/token`** (`issueToken`): public endpoint; validates `clientId` / `clientSecret` and returns a self-issued **HS256 JWT**.
-- **Lambda TOKEN authorizer** (`authorizer`): verifies that JWT (`iss`, `aud`, signature, expiry) on every `/items` route before invoking the CRUD handler.
-- DynamoDB single-table design with primary key `id`.
-- Stage-specific resources through `serverless deploy --stage <stage>`:
-  - `notes-crud-api-items-dev`
-  - `notes-crud-api-items-prod`
+- **Service name**: `coffee-shop-api` (stack and default resource prefix).
+- **Public**: `POST /auth/token` (`issueToken`) — exchanges `clientId` / `clientSecret` for a short-lived **HS256 JWT**.
+- **Protected** (authorizer on every route below):
+  - `POST /menu-items` → `createMenuItem`
+  - `GET /menu-items` → `listMenuItems`
+  - `GET /menu-items/{id}` → `getMenuItem`
+  - `PUT /menu-items/{id}` → `updateMenuItem`
+  - `DELETE /menu-items/{id}` → `deleteMenuItem`
+- **Authorizer**: `authorizer` — Lambda **TOKEN** authorizer; validates `Authorization: Bearer <jwt>`.
+- **Data**: single DynamoDB table per stage, partition key `id` (string UUID). Physical table name: `coffee-shop-api-menu-items-<stage>`.
 
-## Project Structure
+## Project structure
 
 ```txt
 .
 |-- .github/workflows/deploy.yml
-|-- serverless.yml
+|-- serverless.yml          # service, provider, package, composes infra/*.yml
+|-- infra/
+|   |-- functions.yml       # Lambda + API Gateway HTTP events
+|   `-- resources.dynamodb.yml
+|-- scripts/
+|   |-- deploy.sh           # build + test + serverless deploy (Git Bash)
+|   `-- print.sh            # serverless print (validates JWT env vars)
+|-- tests/                  # Vitest specs (*.test.ts)
+|-- vitest.config.ts
 |-- package.json
 |-- tsconfig.json
 `-- src
     |-- handlers
-    |   |-- createItem.ts
-    |   |-- listItems.ts
-    |   |-- getItem.ts
-    |   |-- updateItem.ts
-    |   |-- deleteItem.ts
+    |   |-- createMenuItem.ts
+    |   |-- listMenuItems.ts
+    |   |-- getMenuItem.ts
+    |   |-- updateMenuItem.ts
+    |   |-- deleteMenuItem.ts
     |   |-- issueToken.ts
     |   `-- authorizer.ts
     `-- lib
@@ -79,29 +84,31 @@ Response `200`:
 }
 ```
 
-2. Call `/items` routes with:
+2. Call **`/menu-items`** routes with:
 
 ```http
 Authorization: Bearer <access_token>
 ```
 
-Environment variables (required at **deploy** time so they are baked into Lambda configuration):
+### Environment variables (deploy time)
+
+These are injected via `serverless.yml` from your shell or CI secrets:
 
 | Variable | Example | Purpose |
 |----------|---------|---------|
 | `JWT_SECRET` | 32+ character random string | HS256 signing key |
-| `JWT_ISSUER` | `notes-crud-api` | JWT `iss` claim |
-| `JWT_AUDIENCE` | `notes-crud-api-clients` | JWT `aud` claim |
+| `JWT_ISSUER` | `coffee-shop-api` | JWT `iss` claim |
+| `JWT_AUDIENCE` | `coffee-shop-clients` | JWT `aud` claim |
 | `API_CLIENT_ID` | service client id | Must match `clientId` in token request |
 | `API_CLIENT_SECRET` | long random secret | Must match `clientSecret` in token request |
 | `JWT_EXPIRES_IN` | (optional) `3600` | Lifetime in seconds (60–604800); default `3600` if unset |
 
-Locally before `serverless deploy`:
+Example exports before deploy:
 
 ```bash
 export JWT_SECRET="...at-least-32-chars..."
-export JWT_ISSUER="notes-crud-api"
-export JWT_AUDIENCE="notes-crud-api-clients"
+export JWT_ISSUER="coffee-shop-api"
+export JWT_AUDIENCE="coffee-shop-clients"
 export API_CLIENT_ID="your-client-id"
 export API_CLIENT_SECRET="your-client-secret"
 # optional:
@@ -113,10 +120,8 @@ Invalid or missing tokens on protected routes receive `401 Unauthorized` from AP
 ## Prerequisites
 
 - Node.js 22+
-- AWS account
-- AWS credentials configured locally (for manual deploys)
-- Serverless Framework CLI (installed via npm in this project)
-- Values for `JWT_*` and `API_CLIENT_*` (see table above)
+- AWS account and credentials for deploys
+- Serverless CLI via `npx serverless` / project `devDependencies`
 
 ## Install
 
@@ -124,118 +129,111 @@ Invalid or missing tokens on protected routes receive `401 Unauthorized` from AP
 npm install
 ```
 
-## Local Validation
-
-Run type checks:
+## Tests and typecheck
 
 ```bash
 npm run build
+npm test
 ```
 
-Package/deploy manually (with JWT and client credential env vars set):
+Watch mode: `npm run test:watch`
+
+## Deployment helpers (Bash)
+
+From the repo root (e.g. **Git Bash** on Windows), after exporting JWT + client env vars and AWS credentials:
 
 ```bash
-source .env
+chmod +x scripts/deploy.sh scripts/print.sh   # Unix-like shells only
+./scripts/print.sh dev                           # resolved CloudFormation template
+./scripts/deploy.sh dev                        # build + test + serverless deploy
 ```
+
+`deploy.sh` runs `npm run build`, `npm test`, then `npx serverless deploy --stage <stage> --region $AWS_REGION` (region defaults to `us-east-1` if unset).
+
+## Manual deploy (npm scripts)
+
+With the same env vars exported (or `source .env` if you maintain one locally):
 
 ```bash
 npm run deploy:dev
 npm run deploy:prod
 ```
 
-or
+Or:
 
 ```bash
 npx serverless deploy --stage dev --region us-east-2
 npx serverless deploy --stage prod --region us-east-2
 ```
 
-## API Contract
+## API contract (menu items)
 
-Use **`POST /auth/token`** first to obtain `access_token`. Every `/items` request below must include `Authorization: Bearer <JWT>` unless noted otherwise.
+Use **`POST /auth/token`** first. Every **`/menu-items`** request must send `Authorization: Bearer <jwt>` unless noted.
 
-### Create item
+### Create menu item
 
-`POST /items`
-
-Request body:
+`POST /menu-items`
 
 ```json
 {
-  "title": "first note",
-  "content": "hello world"
+  "name": "Oat Latte",
+  "description": "12oz, oat milk",
+  "price": 5.25,
+  "available": true
 }
 ```
 
-Response `201`:
+- `name` (string, required), `price` (number ≥ 0, required).
+- `description` optional (defaults to empty string).
+- `available` optional (defaults to `true`).
+
+### List menu items
+
+`GET /menu-items` — returns all rows (DynamoDB **Scan**; suitable for demos).
+
+### Get menu item
+
+`GET /menu-items/{id}`
+
+### Update menu item
+
+`PUT /menu-items/{id}`
 
 ```json
 {
-  "message": "Item created.",
-  "data": {
-    "id": "uuid",
-    "title": "first note",
-    "content": "hello world",
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "updatedAt": "2026-01-01T00:00:00.000Z"
-  }
+  "name": "Oat Latte",
+  "description": "16oz",
+  "price": 5.75,
+  "available": false
 }
 ```
 
-### List items
+`name`, `price`, `available` are required; `description` defaults to `""` if omitted.
 
-`GET /items`
+### Delete menu item
 
-### Get item
-
-`GET /items/{id}`
-
-### Update item
-
-`PUT /items/{id}`
-
-Request body:
-
-```json
-{
-  "title": "updated title",
-  "content": "updated content"
-}
-```
-
-### Delete item
-
-`DELETE /items/{id}`
+`DELETE /menu-items/{id}`
 
 ## CI/CD
 
-Pipeline file: `.github/workflows/deploy.yml`
+Pipeline: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
 
-Trigger:
+- Triggers: push to `master`, pull requests.
+- `test-and-build`: `npm ci`, `npm run build`, **`npm test`**.
+- `deploy-dev` / `deploy-prod`: `npx serverless deploy` with AWS + JWT secrets.
 
-- Push to `master`
+Required GitHub secrets:
 
-Jobs:
+- **`SERVERLESS_ACCESS_KEY`** — Serverless Framework **v4+** requires this in CI (or `SERVERLESS_LICENSE_KEY`). Create an access key in the [Serverless Dashboard](https://app.serverless.com) under your org (Access Keys), then add it as a repository secret. This is separate from AWS credentials.
+- `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
+- `JWT_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE`, `API_CLIENT_ID`, `API_CLIENT_SECRET`
+- Optional: `JWT_EXPIRES_IN`
 
-1. `test-and-build`: install dependencies and run `npm run build`.
-2. `deploy-dev`: deploy stack to `dev` stage.
-3. `deploy-prod`: deploy stack to `prod` stage after successful `dev`.
+Locally you can use `serverless login` instead of setting `SERVERLESS_ACCESS_KEY`; in GitHub Actions the secret is required for `npx serverless deploy`.
 
-Required GitHub repository secrets:
+### CI/CD evidence
 
-- `AWS_ACCESS_KEY_ID`
-- `AWS_SECRET_ACCESS_KEY`
-- `AWS_REGION`
-- `JWT_SECRET` (32+ characters)
-- `JWT_ISSUER`
-- `JWT_AUDIENCE`
-- `API_CLIENT_ID`
-- `API_CLIENT_SECRET`
-- `JWT_EXPIRES_IN` (optional; omit or set empty to use default 3600 seconds in Lambda code—if you set this secret in GitHub, use a numeric string)
-
-### CI/CD Evidence
-
-Add screenshots here after running the workflow:
+Add screenshots after runs:
 
 - `docs/screenshots/workflow-success.png`
 - `docs/screenshots/dev-deploy.png`
@@ -243,8 +241,10 @@ Add screenshots here after running the workflow:
 
 ## Notes
 
-- CRUD is implemented through Lambda handlers only (no API Gateway service proxy integration to DynamoDB).
-- Infrastructure is fully defined in `serverless.yml`.
+- CRUD uses **Lambda integration only** (no API Gateway DynamoDB proxy).
+- Root [`serverless.yml`](serverless.yml) composes [`infra/functions.yml`](infra/functions.yml) and [`infra/resources.dynamodb.yml`](infra/resources.dynamodb.yml).
+- **`package.individually`** and `package.patterns` trim deployment artifacts (see `serverless.yml`).
+- The Serverless **`service`** name is `coffee-shop-api`, so AWS creates a **new** stack and API compared to an older `notes-crud-api` deployment. Remove the previous stack in CloudFormation when you no longer need it.
 
 ## The Challenge
 
@@ -255,33 +255,3 @@ Please use GitHub Actions CI/CD pipeline, AWS CodePipeline, or Serverless Pro CI
 You can take screenshots of the CI/CD setup and include them in the README.
 
 The CI/CD should trigger a deployment based on a git push to the master branch which goes through and deploys the backend Serverless Framework REST API and any other resources e.g. DynamoDB Table(s).
-
-### Requirements
-
-0. All application code must be written using NodeJS, Typescript is acceptable as well
-
-1. All AWS Infrastructure needs to be automated with IAC using [Serverless Framework](https://www.serverless.com)
-
-2. The API Gateway REST API should store data in DynamoDB
-
-3. There should be 4-5 lambdas that include the following CRUD functionality (Create, Read, Update, Delete) *don't use service proxy integration directly to DynamoDB from API Gateway
-
-3. Build the CI/CD pipeline to support multi-stage deployments e.g. dev, prod
-
-4. The template should be fully working and documented
-
-4. A public GitHub repository must be shared with frequent commits
-
-5. A video should be recorded (www.loom.com) of you talking over the application code, IAC, and any additional areas you want to highlight in your solution to demonstrate additional skills
-
-Please spend only what you consider a reasonable amount of time for this.
-
-## Optionally
-
-Please feel free to include any of the following to show additional experience:
-
-1. Make the project fit a specific business case e.g. Coffee Shop APIs vs Notes CRUD directly from AWS docs
-2. AWS Lambda packaging
-3. Organization of YAML files
-4. Bash/other scripts to support deployment
-5. Unit tests, integration tests, etc

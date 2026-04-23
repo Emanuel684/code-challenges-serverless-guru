@@ -1,5 +1,27 @@
-service: notes-crud-api
+# Coffee shop menu API — Serverless Framework on AWS
+# -----------------------------------------------------------------------------
+# Entrypoint: provider + packaging; functions/resources live under infra/*.yml
+# Public: POST /auth/token. Protected: /menu-items CRUD (Lambda TOKEN authorizer).
+# -----------------------------------------------------------------------------
+service: coffee-shop-api
 frameworkVersion: "4"
+
+# Smaller per-function zip uploads; excludes dev-only files from bundles.
+package:
+  individually: true
+  patterns:
+    - "!.git/**"
+    - "!.github/**"
+    - "!README.md"
+    - "!images/**"
+    - "!scripts/**"
+    - "!tests/**"
+    - "!**/*.test.ts"
+    - "!vitest.config.ts"
+    - "!coverage/**"
+    - "!.env"
+    - "!.env.*"
+    - "!*.md"
 
 provider:
   name: aws
@@ -7,7 +29,7 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
   environment:
-    ITEMS_TABLE_NAME: ${self:service}-items-${sls:stage}
+    MENU_ITEMS_TABLE_NAME: ${self:service}-menu-items-${sls:stage}
     JWT_SECRET: ${env:JWT_SECRET}
     JWT_ISSUER: ${env:JWT_ISSUER}
     JWT_AUDIENCE: ${env:JWT_AUDIENCE}
@@ -26,90 +48,9 @@ provider:
             - dynamodb:DeleteItem
           Resource:
             - Fn::GetAtt:
-                - ItemsTable
+                - MenuItemsTable
                 - Arn
 
-functions:
-  issueToken:
-    handler: src/handlers/issueToken.handler
-    events:
-      - http:
-          path: /auth/token
-          method: post
-          cors: true
-  authorizer:
-    handler: src/handlers/authorizer.handler
-  createItem:
-    handler: src/handlers/createItem.handler
-    events:
-      - http:
-          path: /items
-          method: post
-          cors: true
-          authorizer:
-            name: authorizer
-            type: token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 0
-  listItems:
-    handler: src/handlers/listItems.handler
-    events:
-      - http:
-          path: /items
-          method: get
-          cors: true
-          authorizer:
-            name: authorizer
-            type: token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 0
-  getItem:
-    handler: src/handlers/getItem.handler
-    events:
-      - http:
-          path: /items/{id}
-          method: get
-          cors: true
-          authorizer:
-            name: authorizer
-            type: token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 0
-  updateItem:
-    handler: src/handlers/updateItem.handler
-    events:
-      - http:
-          path: /items/{id}
-          method: put
-          cors: true
-          authorizer:
-            name: authorizer
-            type: token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 0
-  deleteItem:
-    handler: src/handlers/deleteItem.handler
-    events:
-      - http:
-          path: /items/{id}
-          method: delete
-          cors: true
-          authorizer:
-            name: authorizer
-            type: token
-            identitySource: method.request.header.Authorization
-            resultTtlInSeconds: 0
+functions: ${file(infra/functions.yml)}
 
-resources:
-  Resources:
-    ItemsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: ${self:service}-items-${sls:stage}
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
+resources: ${file(infra/resources.dynamodb.yml)}
