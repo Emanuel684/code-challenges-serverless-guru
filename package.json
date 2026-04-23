@@ -1,0 +1,29 @@
+{
+  "name": "code-challenges-serverless-guru",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Serverless Framework CRUD API with API Gateway, Lambda and DynamoDB.",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod",
+    "lint": "eslint .",
+    "remove:dev": "serverless remove --stage dev",
+    "remove:prod": "serverless remove --stage prod"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.147",
+    "@types/node": "^22.15.18",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.25.1",
+    "serverless": "^4.17.1",
+    "serverless-esbuild": "^1.55.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.802.0",
+    "@aws-sdk/lib-dynamodb": "^3.802.0",
+    "uuid": "^11.1.0"
+  }
+}
