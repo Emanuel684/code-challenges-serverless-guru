@@ -1,0 +1,192 @@
+{
+  "name": "serverless-guru-notes-stack-menu-prod",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "create-item",
+      "filename": "create-item.bru",
+      "seq": 1,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz, oat milk\",\n  \"price\": 5.25,\n  \"available\": true\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "delete-item",
+      "filename": "delete-item.bru",
+      "seq": 5,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "get-item",
+      "filename": "get-item.bru",
+      "seq": 3,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "list-item",
+      "filename": "list-item.bru",
+      "seq": 4,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "token",
+      "filename": "token.bru",
+      "seq": 6,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/auth/token",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"clientId\": \"notes-app\",\n  \"clientSecret\": \"WxVma1sF90iMWBQ8WqQF10a0haxBhE2J\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "update-item",
+      "filename": "update-item.bru",
+      "seq": 2,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+        "method": "PUT",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU"
+          }
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "serverless-guru-notes-stack-menu-prod",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0026111602783203125,
+    "filesCount": 6
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "serverless-guru-notes-stack-menu-prod",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "create-item",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "menu-items"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz, oat milk\",\n  \"price\": 5.25,\n  \"available\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "delete-item",
+      "event": [],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "menu-items",
+            "f3907d51-2978-4406-b83b-05fb45630639"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "get-item",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "menu-items",
+            "f3907d51-2978-4406-b83b-05fb45630639"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "list-item",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "menu-items"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "token",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/auth/token",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "auth",
+            "token"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clientId\": \"notes-app\",\n  \"clientSecret\": \"WxVma1sF90iMWBQ8WqQF10a0haxBhE2J\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "update-item",
+      "event": [],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2MzQyLCJleHAiOjE3NzY5ODk5NDJ9.CLZEepKZzIJ01Dt5Av2tGl8jNk7ia4slzwtMm5t9_KU",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+          "protocol": "https",
+          "host": [
+            "wchg9wcsia",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "prod",
+            "menu-items",
+            "f3907d51-2978-4406-b83b-05fb45630639"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": []
+}

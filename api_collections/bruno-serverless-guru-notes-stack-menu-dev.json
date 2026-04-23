@@ -1,0 +1,192 @@
+{
+  "name": "serverless-guru-notes-stack-menu-dev",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "create-item",
+      "filename": "create-item.bru",
+      "seq": 1,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/menu-items",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz, oat milk\",\n  \"price\": 5.25,\n  \"available\": true\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2Mjc2LCJleHAiOjE3NzY5ODk4NzZ9.8cWkts4AE4PgF8059Y5mk49XY18jjnAY5bfBrKXsNE4"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "delete-item",
+      "filename": "delete-item.bru",
+      "seq": 5,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/menu-items/0d1ccb09-d233-4b4f-a081-42d08e6b1a36",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2Mjc2LCJleHAiOjE3NzY5ODk4NzZ9.8cWkts4AE4PgF8059Y5mk49XY18jjnAY5bfBrKXsNE4"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "get-item",
+      "filename": "get-item.bru",
+      "seq": 3,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/menu-items/0d1ccb09-d233-4b4f-a081-42d08e6b1a36",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2Mjc2LCJleHAiOjE3NzY5ODk4NzZ9.8cWkts4AE4PgF8059Y5mk49XY18jjnAY5bfBrKXsNE4"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "list-item",
+      "filename": "list-item.bru",
+      "seq": 4,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/menu-items",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2Mjc2LCJleHAiOjE3NzY5ODk4NzZ9.8cWkts4AE4PgF8059Y5mk49XY18jjnAY5bfBrKXsNE4"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "token",
+      "filename": "token.bru",
+      "seq": 6,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/auth/token",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"clientId\": \"notes-app\",\n  \"clientSecret\": \"WxVma1sF90iMWBQ8WqQF10a0haxBhE2J\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "update-item",
+      "filename": "update-item.bru",
+      "seq": 2,
+      "request": {
+        "url": "https://m5kckn174a.execute-api.us-east-2.amazonaws.com/dev/menu-items/0d1ccb09-d233-4b4f-a081-42d08e6b1a36",
+        "method": "PUT",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Im1lbnUtaXRlbXM6cmVhZCBtZW51LWl0ZW1zOndyaXRlIiwic3ViIjoibm90ZXMtYXBwIiwiaXNzIjoibm90ZXMtY3J1ZC1hcGkiLCJhdWQiOiJub3Rlcy1jcnVkLWFwaS1jbGllbnRzIiwiaWF0IjoxNzc2OTg2Mjc2LCJleHAiOjE3NzY5ODk4NzZ9.8cWkts4AE4PgF8059Y5mk49XY18jjnAY5bfBrKXsNE4"
+          }
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "serverless-guru-notes-stack-menu-dev",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0.0026111602783203125,
+    "filesCount": 6
+  }
+}
