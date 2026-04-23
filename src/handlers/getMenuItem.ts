@@ -1,5 +1,8 @@
+/**
+ * Fetch one menu item by id (`GET /menu-items/{id}`).
+ */
 import { APIGatewayProxyHandler } from "aws-lambda";
-import { DeleteCommand } from "@aws-sdk/lib-dynamodb";
+import { GetCommand } from "@aws-sdk/lib-dynamodb";
 import { docClient, getTableName } from "../lib/db";
 import { json } from "../lib/response";
 
@@ -10,27 +13,21 @@ export const handler: APIGatewayProxyHandler = async (event) => {
       return json(400, { message: "id path parameter is required." });
     }
 
-    await docClient.send(
-      new DeleteCommand({
+    const result = await docClient.send(
+      new GetCommand({
         TableName: getTableName(),
-        Key: { id },
-        ConditionExpression: "attribute_exists(id)"
+        Key: { id }
       })
     );
 
-    return json(200, { message: "Item deleted.", data: { id } });
-  } catch (error) {
-    if (
-      typeof error === "object" &&
-      error !== null &&
-      "name" in error &&
-      error.name === "ConditionalCheckFailedException"
-    ) {
-      return json(404, { message: "Item not found." });
+    if (!result.Item) {
+      return json(404, { message: "Menu item not found." });
     }
 
+    return json(200, { message: "Menu item fetched.", data: result.Item });
+  } catch (error) {
     return json(500, {
-      message: "Could not delete item.",
+      message: "Could not fetch menu item.",
       error: error instanceof Error ? error.message : "Unknown error"
     });
   }

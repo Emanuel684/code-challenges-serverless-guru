@@ -9,10 +9,13 @@ export const docClient = DynamoDBDocumentClient.from(client, {
   }
 });
 
+/**
+ * Table name from `MENU_ITEMS_TABLE_NAME` (set in `serverless.yml` per stage).
+ */
 export const getTableName = (): string => {
-  const tableName = process.env.ITEMS_TABLE_NAME;
+  const tableName = process.env.MENU_ITEMS_TABLE_NAME;
   if (!tableName) {
-    throw new Error("ITEMS_TABLE_NAME is not configured.");
+    throw new Error("MENU_ITEMS_TABLE_NAME is not configured.");
   }
 
   return tableName;

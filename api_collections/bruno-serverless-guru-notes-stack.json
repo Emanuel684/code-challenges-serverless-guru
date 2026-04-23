@@ -8,13 +8,13 @@
       "filename": "create-item.bru",
       "seq": 1,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
         "method": "POST",
         "headers": [],
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"title\": \"first note\",\n  \"content\": \"hello world\"\n}",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz\",\n  \"price\": 5.25,\n  \"available\": true\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -38,13 +38,13 @@
       "filename": "update-item.bru",
       "seq": 2,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
         "method": "PUT",
         "headers": [],
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"title\": \"updated title\",\n  \"content\": \"updated content\"\n}",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -68,7 +68,7 @@
       "filename": "get-item.bru",
       "seq": 3,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/7d532b77-f789-4c39-a50e-695020dcf01f",
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/7d532b77-f789-4c39-a50e-695020dcf01f",
         "method": "GET",
         "headers": [],
         "params": [],
@@ -97,7 +97,7 @@
       "filename": "list-item.bru",
       "seq": 4,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
         "method": "GET",
         "headers": [],
         "params": [],
@@ -126,7 +126,7 @@
       "filename": "delete-item.bru",
       "seq": 5,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
         "method": "DELETE",
         "headers": [],
         "params": [],

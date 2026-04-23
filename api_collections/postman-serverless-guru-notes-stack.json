@@ -20,7 +20,7 @@
         },
         "description": "",
         "url": {
-          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
           "protocol": "https",
           "host": [
             "yce3xki3f0",
@@ -31,14 +31,14 @@
           ],
           "path": [
             "dev",
-            "items"
+            "menu-items"
           ],
           "query": [],
           "variable": []
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"title\": \"first note\",\n  \"content\": \"hello world\"\n}",
+          "raw": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz\",\n  \"price\": 5.25,\n  \"available\": true\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -63,7 +63,7 @@
         },
         "description": "",
         "url": {
-          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
           "protocol": "https",
           "host": [
             "yce3xki3f0",
@@ -74,7 +74,7 @@
           ],
           "path": [
             "dev",
-            "items",
+            "menu-items",
             "42ec8716-7dff-42d2-b101-753dbdbee4a6"
           ],
           "query": [],
@@ -82,7 +82,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"title\": \"updated title\",\n  \"content\": \"updated content\"\n}",
+          "raw": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -107,7 +107,7 @@
         },
         "description": "",
         "url": {
-          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/7d532b77-f789-4c39-a50e-695020dcf01f",
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/7d532b77-f789-4c39-a50e-695020dcf01f",
           "protocol": "https",
           "host": [
             "yce3xki3f0",
@@ -118,7 +118,7 @@
           ],
           "path": [
             "dev",
-            "items",
+            "menu-items",
             "7d532b77-f789-4c39-a50e-695020dcf01f"
           ],
           "query": [],
@@ -142,7 +142,7 @@
         },
         "description": "",
         "url": {
-          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
           "protocol": "https",
           "host": [
             "yce3xki3f0",
@@ -153,7 +153,7 @@
           ],
           "path": [
             "dev",
-            "items"
+            "menu-items"
           ],
           "query": [],
           "variable": []
@@ -176,7 +176,7 @@
         },
         "description": "",
         "url": {
-          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
           "protocol": "https",
           "host": [
             "yce3xki3f0",
@@ -187,7 +187,7 @@
           ],
           "path": [
             "dev",
-            "items",
+            "menu-items",
             "3e36a8bb-927b-4c19-96b6-1928e9ca182f"
           ],
           "query": [],

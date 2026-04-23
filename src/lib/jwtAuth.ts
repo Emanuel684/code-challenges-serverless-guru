@@ -58,7 +58,7 @@ export function safeEqualStrings(a: string, b: string): boolean {
   return timingSafeEqual(ba, bb);
 }
 
-const DEFAULT_SCOPE = "items:read items:write";
+const DEFAULT_SCOPE = "menu-items:read menu-items:write";
 
 export async function mintAccessToken(
   subjectClientId: string

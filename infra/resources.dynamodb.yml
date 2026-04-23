@@ -1,0 +1,13 @@
+# DynamoDB resources for the coffee shop API (composed by root serverless.yml).
+Resources:
+  MenuItemsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:service}-menu-items-${sls:stage}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
