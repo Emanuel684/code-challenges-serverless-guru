@@ -27,7 +27,7 @@
         "auth": {
           "mode": "bearer",
           "bearer": {
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+            "token": ""
           }
         }
       }
@@ -57,7 +57,7 @@
         "auth": {
           "mode": "bearer",
           "bearer": {
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+            "token": ""
           }
         }
       }
@@ -86,7 +86,7 @@
         "auth": {
           "mode": "bearer",
           "bearer": {
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+            "token": ""
           }
         }
       }
@@ -115,7 +115,7 @@
         "auth": {
           "mode": "bearer",
           "bearer": {
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+            "token": ""
           }
         }
       }
@@ -144,7 +144,7 @@
         "auth": {
           "mode": "bearer",
           "bearer": {
-            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+            "token": ""
           }
         }
       }
