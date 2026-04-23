@@ -1,0 +1,192 @@
+{
+  "name": "serverless-guru-notes-stack",
+  "version": "1",
+  "items": [
+    {
+      "type": "http",
+      "name": "create-item",
+      "filename": "create-item.bru",
+      "seq": 1,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"title\": \"first note\",\n  \"content\": \"hello world\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "update-item",
+      "filename": "update-item.bru",
+      "seq": 2,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
+        "method": "PUT",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"title\": \"updated title\",\n  \"content\": \"updated content\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "get-item",
+      "filename": "get-item.bru",
+      "seq": 3,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/7d532b77-f789-4c39-a50e-695020dcf01f",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "list-item",
+      "filename": "list-item.bru",
+      "seq": 4,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+        "method": "GET",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "delete-item",
+      "filename": "delete-item.bru",
+      "seq": 5,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
+        "method": "DELETE",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "none",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ"
+          }
+        }
+      }
+    },
+    {
+      "type": "http",
+      "name": "token",
+      "filename": "token.bru",
+      "seq": 6,
+      "request": {
+        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/auth/token",
+        "method": "POST",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"clientId\": \"notes-app\",\n  \"clientSecret\": \"WxVma1sF90iMWBQ8WqQF10a0haxBhE2J\"\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "inherit"
+        }
+      }
+    }
+  ],
+  "environments": [],
+  "brunoConfig": {
+    "version": "1",
+    "name": "serverless-guru-notes-stack",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "size": 0,
+    "filesCount": 0
+  }
+}
