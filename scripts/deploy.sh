@@ -3,6 +3,7 @@
 # Usage (from repo root, Git Bash on Windows):
 #   export JWT_SECRET=... JWT_ISSUER=... JWT_AUDIENCE=... API_CLIENT_ID=... API_CLIENT_SECRET=...
 #   export AWS_REGION=us-east-1   # plus AWS credentials
+#   export SERVERLESS_ACCESS_KEY=...   # required in CI; locally optional if you ran `serverless login`
 #   ./scripts/deploy.sh [stage]   # stage defaults to dev
 set -euo pipefail
 

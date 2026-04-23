@@ -222,7 +222,14 @@ Pipeline: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
 - `test-and-build`: `npm ci`, `npm run build`, **`npm test`**.
 - `deploy-dev` / `deploy-prod`: `npx serverless deploy` with AWS + JWT secrets.
 
-Required GitHub secrets: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`, `JWT_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE`, `API_CLIENT_ID`, `API_CLIENT_SECRET`, optional `JWT_EXPIRES_IN`.
+Required GitHub secrets:
+
+- **`SERVERLESS_ACCESS_KEY`** — Serverless Framework **v4+** requires this in CI (or `SERVERLESS_LICENSE_KEY`). Create an access key in the [Serverless Dashboard](https://app.serverless.com) under your org (Access Keys), then add it as a repository secret. This is separate from AWS credentials.
+- `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION`
+- `JWT_SECRET`, `JWT_ISSUER`, `JWT_AUDIENCE`, `API_CLIENT_ID`, `API_CLIENT_SECRET`
+- Optional: `JWT_EXPIRES_IN`
+
+Locally you can use `serverless login` instead of setting `SERVERLESS_ACCESS_KEY`; in GitHub Actions the secret is required for `npx serverless deploy`.
 
 ### CI/CD evidence
 

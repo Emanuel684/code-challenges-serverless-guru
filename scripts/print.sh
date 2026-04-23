@@ -2,6 +2,7 @@
 # Print the fully resolved Serverless configuration (no AWS deploy).
 # Usage:
 #   export JWT_SECRET=... JWT_ISSUER=... JWT_AUDIENCE=... API_CLIENT_ID=... API_CLIENT_SECRET=...
+#   export SERVERLESS_ACCESS_KEY=...   # if `serverless print` prompts for auth (v4+)
 #   ./scripts/print.sh [stage]
 set -euo pipefail
 
