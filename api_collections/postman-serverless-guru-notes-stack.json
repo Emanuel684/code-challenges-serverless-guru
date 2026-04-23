@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "serverless-guru-notes-stack",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "create-item",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "items"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"first note\",\n  \"content\": \"hello world\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "update-item",
+      "event": [],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "items",
+            "42ec8716-7dff-42d2-b101-753dbdbee4a6"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"updated title\",\n  \"content\": \"updated content\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "get-item",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/7d532b77-f789-4c39-a50e-695020dcf01f",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "items",
+            "7d532b77-f789-4c39-a50e-695020dcf01f"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "list-item",
+      "event": [],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "items"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "delete-item",
+      "event": [],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "auth": {
+          "type": "bearer",
+          "bearer": {
+            "key": "token",
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJzY29wZSI6Iml0ZW1zOnJlYWQgaXRlbXM6d3JpdGUiLCJzdWIiOiJub3Rlcy1hcHAiLCJpc3MiOiJub3Rlcy1jcnVkLWFwaSIsImF1ZCI6Im5vdGVzLWNydWQtYXBpLWNsaWVudHMiLCJpYXQiOjE3NzY5ODI2NDgsImV4cCI6MTc3Njk4NjI0OH0.lEfxMxN70bljIGHouyuW_VXLPrrNuxcWqbfGcXp4VTQ",
+            "type": "string"
+          }
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "items",
+            "3e36a8bb-927b-4c19-96b6-1928e9ca182f"
+          ],
+          "query": [],
+          "variable": []
+        }
+      }
+    },
+    {
+      "name": "token",
+      "event": [],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "auth": {
+          "type": "noauth"
+        },
+        "description": "",
+        "url": {
+          "raw": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/auth/token",
+          "protocol": "https",
+          "host": [
+            "yce3xki3f0",
+            "execute-api",
+            "us-east-2",
+            "amazonaws",
+            "com"
+          ],
+          "path": [
+            "dev",
+            "auth",
+            "token"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"clientId\": \"notes-app\",\n  \"clientSecret\": \"WxVma1sF90iMWBQ8WqQF10a0haxBhE2J\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "variable": []
+}
