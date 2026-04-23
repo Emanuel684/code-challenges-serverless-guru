@@ -1,5 +1,5 @@
 {
-  "name": "serverless-guru-notes-stack",
+  "name": "serverless-guru-notes-stack-menu-prod",
   "version": "1",
   "items": [
     {
@@ -8,13 +8,13 @@
       "filename": "create-item.bru",
       "seq": 1,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
         "method": "POST",
         "headers": [],
         "params": [],
         "body": {
           "mode": "json",
-          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz\",\n  \"price\": 5.25,\n  \"available\": true\n}",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"12oz, oat milk\",\n  \"price\": 5.25,\n  \"available\": true\n}",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -34,17 +34,16 @@
     },
     {
       "type": "http",
-      "name": "update-item",
-      "filename": "update-item.bru",
-      "seq": 2,
+      "name": "delete-item",
+      "filename": "delete-item.bru",
+      "seq": 5,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/42ec8716-7dff-42d2-b101-753dbdbee4a6",
-        "method": "PUT",
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+        "method": "DELETE",
         "headers": [],
         "params": [],
         "body": {
-          "mode": "json",
-          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
+          "mode": "none",
           "formUrlEncoded": [],
           "multipartForm": [],
           "file": []
@@ -68,7 +67,7 @@
       "filename": "get-item.bru",
       "seq": 3,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/7d532b77-f789-4c39-a50e-695020dcf01f",
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
         "method": "GET",
         "headers": [],
         "params": [],
@@ -97,37 +96,8 @@
       "filename": "list-item.bru",
       "seq": 4,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items",
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items",
         "method": "GET",
-        "headers": [],
-        "params": [],
-        "body": {
-          "mode": "none",
-          "formUrlEncoded": [],
-          "multipartForm": [],
-          "file": []
-        },
-        "script": {},
-        "vars": {},
-        "assertions": [],
-        "tests": "",
-        "docs": "",
-        "auth": {
-          "mode": "bearer",
-          "bearer": {
-            "token": ""
-          }
-        }
-      }
-    },
-    {
-      "type": "http",
-      "name": "delete-item",
-      "filename": "delete-item.bru",
-      "seq": 5,
-      "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/menu-items/3e36a8bb-927b-4c19-96b6-1928e9ca182f",
-        "method": "DELETE",
         "headers": [],
         "params": [],
         "body": {
@@ -155,7 +125,7 @@
       "filename": "token.bru",
       "seq": 6,
       "request": {
-        "url": "https://yce3xki3f0.execute-api.us-east-2.amazonaws.com/dev/auth/token",
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/auth/token",
         "method": "POST",
         "headers": [],
         "params": [],
@@ -175,18 +145,48 @@
           "mode": "inherit"
         }
       }
+    },
+    {
+      "type": "http",
+      "name": "update-item",
+      "filename": "update-item.bru",
+      "seq": 2,
+      "request": {
+        "url": "https://wchg9wcsia.execute-api.us-east-2.amazonaws.com/prod/menu-items/f3907d51-2978-4406-b83b-05fb45630639",
+        "method": "PUT",
+        "headers": [],
+        "params": [],
+        "body": {
+          "mode": "json",
+          "json": "{\n  \"name\": \"Oat Latte\",\n  \"description\": \"16oz\",\n  \"price\": 5.75,\n  \"available\": false\n}",
+          "formUrlEncoded": [],
+          "multipartForm": [],
+          "file": []
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": "",
+        "auth": {
+          "mode": "bearer",
+          "bearer": {
+            "token": ""
+          }
+        }
+      }
     }
   ],
   "environments": [],
   "brunoConfig": {
     "version": "1",
-    "name": "serverless-guru-notes-stack",
+    "name": "serverless-guru-notes-stack-menu-prod",
     "type": "collection",
     "ignore": [
       "node_modules",
       ".git"
     ],
-    "size": 0,
-    "filesCount": 0
+    "size": 0.0026111602783203125,
+    "filesCount": 6
   }
 }
