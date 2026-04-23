@@ -23,18 +23,6 @@ provider:
                 - ItemsTable
                 - Arn
 
-plugins:
-  - serverless-esbuild
-
-custom:
-  esbuild:
-    bundle: true
-    minify: false
-    sourcemap: true
-    target: node22
-    platform: node
-    concurrency: 10
-
 functions:
   createItem:
     handler: src/handlers/createItem.handler
