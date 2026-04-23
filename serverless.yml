@@ -8,6 +8,8 @@ provider:
   region: ${opt:region, 'us-east-1'}
   environment:
     ITEMS_TABLE_NAME: ${self:service}-items-${sls:stage}
+    AUTH0_ISSUER_BASE_URL: ${env:AUTH0_ISSUER_BASE_URL}
+    AUTH0_AUDIENCE: ${env:AUTH0_AUDIENCE}
   iam:
     role:
       statements:
@@ -24,6 +26,8 @@ provider:
                 - Arn
 
 functions:
+  authorizer:
+    handler: src/handlers/authorizer.handler
   createItem:
     handler: src/handlers/createItem.handler
     events:
@@ -31,6 +35,11 @@ functions:
           path: /items
           method: post
           cors: true
+          authorizer:
+            name: authorizer
+            type: token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
   listItems:
     handler: src/handlers/listItems.handler
     events:
@@ -38,6 +47,11 @@ functions:
           path: /items
           method: get
           cors: true
+          authorizer:
+            name: authorizer
+            type: token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
   getItem:
     handler: src/handlers/getItem.handler
     events:
@@ -45,6 +59,11 @@ functions:
           path: /items/{id}
           method: get
           cors: true
+          authorizer:
+            name: authorizer
+            type: token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
   updateItem:
     handler: src/handlers/updateItem.handler
     events:
@@ -52,6 +71,11 @@ functions:
           path: /items/{id}
           method: put
           cors: true
+          authorizer:
+            name: authorizer
+            type: token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
   deleteItem:
     handler: src/handlers/deleteItem.handler
     events:
@@ -59,6 +83,11 @@ functions:
           path: /items/{id}
           method: delete
           cors: true
+          authorizer:
+            name: authorizer
+            type: token
+            identitySource: method.request.header.Authorization
+            resultTtlInSeconds: 0
 
 resources:
   Resources:

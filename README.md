@@ -23,6 +23,7 @@ This implementation models a simple Notes API where users can create, read, upda
   - `GET /items/{id}` -> `getItem`
   - `PUT /items/{id}` -> `updateItem`
   - `DELETE /items/{id}` -> `deleteItem`
+- **Auth0 JWT**: A dedicated Lambda **TOKEN** authorizer (`authorizer`) validates `Authorization: Bearer <JWT>` on every CRUD route before invoking the handler.
 - DynamoDB single-table design with primary key `id`.
 - Stage-specific resources through `serverless deploy --stage <stage>`:
   - `notes-crud-api-items-dev`
@@ -42,12 +43,42 @@ This implementation models a simple Notes API where users can create, read, upda
     |   |-- listItems.ts
     |   |-- getItem.ts
     |   |-- updateItem.ts
-    |   `-- deleteItem.ts
+    |   |-- deleteItem.ts
+    |   `-- authorizer.ts
     `-- lib
         |-- db.ts
         |-- response.ts
-        `-- types.ts
+        |-- types.ts
+        `-- auth0.ts
 ```
+
+## Authentication (Auth0)
+
+All `/items` endpoints require a valid Auth0 access token (JWT) intended for your API.
+
+1. In Auth0, create an **API** and note the **Identifier** (this is your JWT `aud` / audience).
+2. Set **Allowed Callback / Machine-to-Machine** as needed for your client; obtain tokens with that API audience.
+3. Call the API with:
+
+```http
+Authorization: Bearer <access_token>
+```
+
+Environment variables (required at **deploy** time so they are baked into Lambda configuration):
+
+| Variable | Example | Purpose |
+|----------|---------|---------|
+| `AUTH0_ISSUER_BASE_URL` | `https://YOUR_TENANT.auth0.com` | Issuer / JWKS base (no path) |
+| `AUTH0_AUDIENCE` | `https://your-api-id` | Must match JWT `aud` |
+
+Locally before `serverless deploy`:
+
+```bash
+export AUTH0_ISSUER_BASE_URL="https://YOUR_TENANT.auth0.com"
+export AUTH0_AUDIENCE="https://your-api-identifier"
+```
+
+Invalid or missing tokens receive `401 Unauthorized` from API Gateway.
 
 ## Prerequisites
 
@@ -55,6 +86,7 @@ This implementation models a simple Notes API where users can create, read, upda
 - AWS account
 - AWS credentials configured locally (for manual deploys)
 - Serverless Framework CLI (installed via npm in this project)
+- Auth0 tenant + API (audience) and a way to mint access tokens for testing
 
 ## Install
 
@@ -70,7 +102,7 @@ Run type checks:
 npm run build
 ```
 
-Package/deploy manually:
+Package/deploy manually (with Auth0 env vars set):
 
 ```bash
 npm run deploy:dev
@@ -78,6 +110,8 @@ npm run deploy:prod
 ```
 
 ## API Contract
+
+Every request below must include `Authorization: Bearer <JWT>` unless noted otherwise.
 
 ### Create item
 
@@ -151,6 +185,8 @@ Required GitHub repository secrets:
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
+- `AUTH0_ISSUER_BASE_URL` (e.g. `https://YOUR_TENANT.auth0.com`)
+- `AUTH0_AUDIENCE` (Auth0 API identifier)
 
 ### CI/CD Evidence
 

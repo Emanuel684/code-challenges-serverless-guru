@@ -23,6 +23,7 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.802.0",
     "@aws-sdk/lib-dynamodb": "^3.802.0",
+    "jose": "^6.0.10",
     "uuid": "^11.1.0"
   }
 }
